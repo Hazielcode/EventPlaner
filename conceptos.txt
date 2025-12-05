@@ -1,0 +1,14 @@
+¿Qué es MVVM?
+Es el patrón de arquitectura que usé para organizar mi código en tres capas: Model (datos y Firebase), View (pantallas con Compose) y ViewModel (lógica que conecta ambas). Mantiene todo ordenado y separado.
+
+¿Qué es Firebase Auth?
+Es el servicio que usé para manejar el registro e inicio de sesión de usuarios en mi app. Gestiona automáticamente la seguridad y autenticación sin que yo tenga que programar todo desde cero.
+
+¿Qué es Firestore?
+Es la base de datos en la nube donde almacené todos los eventos de mi aplicación. Actualiza los datos en tiempo real sin necesidad de recargar la pantalla.
+
+¿Qué es Jetpack Compose?
+Es la herramienta moderna de Google que utilicé para diseñar todas las pantallas de mi app. Me permite crear interfaces de forma más simple y reactiva.
+
+¿Qué es un CRUD?
+Son las 4 operaciones básicas que implementé en mi app: Crear eventos, Leer/mostrar eventos, Actualizar eventos y Eliminar eventos.
