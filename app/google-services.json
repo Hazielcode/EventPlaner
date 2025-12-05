@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683409328752",
+    "project_id": "eventoplaner",
+    "storage_bucket": "eventoplaner.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683409328752:android:c6ca3583c95f2ecff1c2b5",
+        "android_client_info": {
+          "package_name": "com.alfonso.eventoplaner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJv3KIksF1qyG0frIysmA2_4sqoNGu-ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
