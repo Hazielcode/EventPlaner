@@ -1,0 +1,140 @@
+ 
+
+
+· Qué partes fueron asistidas por IA
+
+La IA me proporcionó las dependencias exactas en build.gradle.kts
+
+ implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation("androidx.navigation:navigation-compose:2.8.4")
+
+Sin la IA, hubiera perdido mucho tiempo buscando qué versiones son compatibles
+entre sí. Me explicó qué hace cada dependencia y por qué la necesito.
+me demore mucho en ver que versión también de firebase era compatible  ,termine usando una versión antigua.
+
+
+
+La IA me ayudó a identificar los imports necesarios, especialmente cuando
+hubo cambios en las APIs. Por ejemplo:
+
+En EventListScreen.kt:
+    import androidx.compose.material.icons.automirrored.filled.ExitToApp
+    import kotlinx.coroutines.flow.Flow
+    import kotlinx.coroutines.channels.awaitClose
+
+Sin su ayuda, me hubiera costado encontrar que Icons.Default.ExitToApp cambió
+a Icons.AutoMirrored.Filled.ExitToApp.
+
+a IA me mostró cómo convertir los listeners de Firebase a Kotlin Flow:
+
+    fun getEvents(): Flow<List<Event>> = callbackFlow {
+        val listener = eventsCollection
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    close(error)
+                    return@addSnapshotListener
+                }
+                trySend(events)
+            }
+        awaitClose { listener.remove() }
+    }
+
+La IA me explicó cómo pasar parámetros en Navigation Compose:
+
+    composable(
+        route = "edit_event/{eventId}/{title}/{date}/{description}",
+        arguments = listOf(
+            navArgument("eventId") { type = NavType.StringType }
+        )
+    )
+
+Y cómo hacer URL encoding:
+    val encodedTitle = URLEncoder.encode(event.title, StandardCharsets.UTF_8.toString())
+
+Sin esto, los eventos con espacios o caracteres especiales no navegaban bien.
+
+que partes programo usted : 
+
+Yo  hice:
+Crear el proyecto en Firebase Console
+Habilitar Authentication (Email/Password)
+ Crear Firestore Database
+ Configurar las reglas de seguridad
+ Descargar e instalar google-services.json
+
+la estructura del evento:
+
+    data class Event(
+        val id: String = "",
+        val userId: String = "",
+        val title: String = "",      
+        val date: String = "",       
+        val description: String = ""
+    )
+
+LoginScreen.kt:
+  - Cambié los textos a español
+  - Decidí el layout vertical centrado
+  - Agregué el botón "Registrarme"
+  - Personalicé los mensajes de error
+
+ RegisterScreen.kt:
+  - Agregué el campo de confirmar contraseña
+  - Implementé las validaciones personalizadas
+  - Decidí el orden de los campos
+
+EventListScreen.kt:
+  - Diseñé la tarjeta EventCard con mi propio estilo
+  - Decidí qué información mostrar (título, fecha, descripción)
+  - Agregué el diálogo de confirmación antes de eliminar
+  - Posicioné los botones de editar y eliminar a la derecha
+
+configuré el MainActivity:
+
+    class MainActivity : ComponentActivity() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            enableEdgeToEdge()
+            setContent {
+                EventoPlanerTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        AppNavigation()
+                    }
+                }
+            }
+        }
+    }
+
+taba izy.
+· Cómo evitar depender totalmente de IA
+
+
+SIEMPRE ENTENDER ANTES DE COPIAR 
+
+Cada vez que la IA me daba código:
+1. Lo leía línea por línea
+2. Investigaba qué hacía cada parte
+3. Probaba modificarlo para ver qué pasaba
+4. Solo lo usaba cuando lo entendía completamente
+
+Por ejemplo, cuando vi "callbackFlow", investigué qué era un Flow en Kotlin,
+probé ejemplos simples, y recién entonces lo implementé.
+Hice experimentos como:
+✓ ¿Qué pasa si cambio StateFlow por MutableLiveData?
+✓ ¿Puedo usar var en lugar de val en el data class Event?
+✓ ¿Qué error sale si no uso suspend en las funciones de Repository?
+✓ ¿Cómo se ve si cambio los colores del tema? 
+mas que nada por curioso , ya que quiero dedicarme a Kotlin. ANDROID 
+un ejemplo de como no depender , es saber arreglar los problemas básicos : 
+cuando apareció "Could not resolve firebase", primero intenté:
+- Build → Clean Project
+- Invalidate Caches
+- Cambiar de red WiFi
+Y solo después la IA me sugirió bajar la versión del BoM.
